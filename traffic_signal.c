@@ -16,8 +16,8 @@ int main()
     char v;
     scanf(" %c", &v);
     printf("enter direction in which you want to travle : ");
-    char dir3 = 's';
-    //    scanf("%s",dir3);
+    char dir3 ;
+    scanf("  %c",&dir3);
     printf("enter your vehicle cordinate :");
     int x, y;
     scanf("%d %d", &x, &y);
@@ -26,8 +26,8 @@ int main()
     char v1;
     scanf(" %c", &v1);
     printf("\nenter direction in which you want to travle : ");
-    char dir1 = 's';
-    //    scanf("%c", &dir1);
+    char dir1 ;
+       scanf("  %c", &dir1);
     printf("\nenter your vehicle cordinate :");
     int x1, y1;
     scanf("%d %d", &x1, &y1);
@@ -36,8 +36,8 @@ int main()
     char v2;
     scanf(" %c", &v2);
     printf("\nenter direction in which you want to travle : ");
-    char dir2 = 'e';
-    //    scanf("%c", &dir2);
+    char dir2 ;
+       scanf("  %c", &dir2);
     printf("\nenter your vehicle cordinate :");
     int x2, y2;
     scanf("%d %d", &x2, &y2);
@@ -48,15 +48,15 @@ int main()
             for (int a = 0; a < 2; a++)
             { 
                 
-                if (x + a + d - 1 >= 0)
-                    cordinate[x + a + d - 1][y] = '.';
-                tick_1_2(dir3, x + a + d, y, v);
-                if (x1 + a + d - 1 >= 0)
-                    cordinate[x1 + a + d - 1][y1] = '.';
-                tick_1_2(dir1, x1 + a + d, y1, v1);
-                if (x2 + a - 1 >= 0)
-                    cordinate[x2 + a - 1][y2] = '.';
-                tick_1_2(dir2, x2 + a, y2, v2);
+                if (x  - 1 >= 0)
+                    cordinate[x - 1][y] = '.';
+                tick_1_2(dir3, x , y, v);x++;
+                if (x1 - 1 >= 0)
+                    cordinate[x1  - 1][y1] = '.';
+                tick_1_2(dir1,x1, y1, v1);x1++;
+                if (x2 - 1 >= 0)cordinate[x2 - 1][y2] = '.';
+
+                tick_1_2(dir2, x2 , y2, v2);x2++;
             }
         }
 
@@ -64,30 +64,30 @@ int main()
         {
             for (int a = 0; a < 2; a++)
             {
-                if (x - a + 1 < 4)
-                    cordinate[x - a + 1][y] = '.';
-                tick_1_2(dir3, x - a, y, v);
-                if (x1 - a + 1 < 4)
-                    cordinate[x1 - a + 1][y1] = '.';
-                tick_1_2(dir1, x1 - a, y1, v1);
-                if (x2 - a + 1 < 4)
-                    cordinate[x2 - a + 1][y2] = '.';
-                tick_1_2(dir2, x2 - a, y2, v2);
+                if (x +1 < 4)
+                    cordinate[x + 1][y] = '.';
+                tick_1_2(dir3, x , y, v);x--;
+                if (x1 + 1 < 4)
+                    cordinate[x1+1][y1] = '.';
+                tick_1_2(dir1, x1 , y1, v1);x1--;
+                if (x2 + 1 < 4)
+                    cordinate[x2  + 1][y2] = '.';
+                tick_1_2(dir2, x2 , y2, v2);x2--;
             }
         }
         if ((dir3 == 'e' && y < 4) || (dir1 == 'e' && y1 < 4) || (dir2 == 'e' && y2 < 4))
         {
             for (int a = 0; a < 2; a++)
             {
-                if (y + a - 1 >= 0)
-                    cordinate[x][y + a - 1] = '.';
-                tick_3_4(dir3, x, y + a, v);
-                if (y1 + a - 1 >= 0)
-                    cordinate[x1][y1 + a - 1] = '.';
-                tick_3_4(dir1, x1, y1 + a, v1);
-                if (y2 + a + d - 1 >= 0)
-                    cordinate[x2][y2 + a + d - 1] = '.';
-                tick_3_4(dir2, x2, y2 + a + d, v2);
+                if (y - 1 >= 0)
+                    cordinate[x][y - 1] = '.';
+                tick_3_4(dir3, x, y , v);y++;
+                if (y1  - 1 >= 0)
+                    cordinate[x1][y1 - 1] = '.';
+                tick_3_4(dir1, x1, y1 , v1);y1++;
+                if (y2  - 1 >= 0)
+                    cordinate[x2][y2  - 1] = '.';
+                tick_3_4(dir2, x2, y2 , v2);y2++;
             }
         }
 
@@ -95,15 +95,15 @@ int main()
         {
             for (int a = 0; a < 2; a++)
             {
-                if (y - a + 1 < 4)
-                    cordinate[x][y - a + 1] = '.';
-                tick_3_4(dir3, x, y - a, v);
-                if (y1 - a + 1 < 4)
-                    cordinate[x1][y1 - a + 1] = '.';
-                tick_3_4(dir1, x1, y1 - a, v1);
-                if (y2 - a + 1 < 4)
-                    cordinate[x2][y2 - a + 1] = '.';
-                tick_3_4(dir2, x2, y2 - a, v2);
+                if (y + 1 < 4)
+                    cordinate[x][y  + 1] = '.';
+                tick_3_4(dir3, x, y , v);y--;
+                if (y1 + 1 < 4)
+                    cordinate[x1][y1 + 1] = '.';
+                tick_3_4(dir1, x1, y1 , v1);y1--;
+                if (y2 + 1 < 4)
+                    cordinate[x2][y2 + 1] = '.';
+                tick_3_4(dir2, x2, y2 , v2);y2--;
             }
         } d+=2;
     }
@@ -142,9 +142,9 @@ void tick_1_2(char dir, int i, int m, char v)
     }
     if (dir == 'n')
     {
-        if (cordinate[3 - i][m] == '.')
+        if (cordinate[i][m] == '.')
         {
-            cordinate[3 - i][m] = v;
+            cordinate[i][m] = v;
 
             for (int j = 0; j < 27; j++)
             {
@@ -172,9 +172,9 @@ void tick_3_4(char dir, int i, int m, char v)
     if (dir == 'w')
 
     {
-        if (cordinate[i][3 - m] == '.')
+        if (cordinate[i][m] == '.')
         {
-            cordinate[i][3 - m] = v;
+            cordinate[i][m] = v;
 
             for (int j = 0; j < 6; j++)
             {

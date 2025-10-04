@@ -5,20 +5,9 @@ void tictactoe();
 void rockpaperscissors();
 void numberguessing();
 void showhighscore();
-int game_id = 1, best_num = 0;
+int game_id = 1, best_num = 0,q;
 char name1[50][19];
-void addplayer()
-{
-    printf("\nenter player:");
-
-    scanf("%s", name1[game_id]);
-    printf("your game id is %d", game_id);
-    game_id++;
-    printf("\nenter player:");
-    scanf("%s", name1[game_id]);
-
-    printf("\nyour game id is %d", game_id);
-}
+void addplayer();
 
 int score[3][50][1];
 
@@ -83,6 +72,20 @@ w:
         break;
     case 2:
         tictactoe();
+          for (int i = 0; i < 50; i++)
+    {
+        printf("=");
+    }
+    printf("\n         TIC-TAC-TOE RANKING\n");
+    for (int i = 0; i < 50; i++)
+    {
+        printf("=");
+    }
+    printf(" \nGame : Tic-Tac-Toe\n");
+    for (int i = 1; i <= q; i++)
+    {
+        printf(" %s     %d\n", name1[i], score[1][i][0]);
+    }
         printf(" \n wnat to go back then prees \"b\"\n");
 
         scanf("%s", menu1);
@@ -182,12 +185,13 @@ void tictactoe()
     {
         printf("=");
     }
-    printf(" enter your game id");
+    printf("\nenter your game id ");
     int id;
     scanf("%d", &id);
-    printf(" enter your game id 2");
+    printf(" enter your game id2 ");
     int id2;
     scanf("%d", &id2);
+    q = id2;
     char arr[3][3];
     for (int i = 1; i < 10; i++)
     {
@@ -316,20 +320,7 @@ void tictactoe()
             }
         }
     }
-    for (int i = 0; i < 50; i++)
-    {
-        printf("=");
-    }
-    printf("\n         TIC-TAC-TOE RANKING\n");
-    for (int i = 0; i < 50; i++)
-    {
-        printf("=");
-    }
-    printf(" \nGame : Tic-Tac-Toe\n");
-    for (int i = 1; i <= id2; i++)
-    {
-        printf(" %s     %d\n", name1[i], score[1][i][0]);
-    }
+   printf("draw \n");
 }
 void rockpaperscissors()
 {
@@ -358,9 +349,10 @@ void rockpaperscissors()
     scanf("%s", &m[0]);
     if (n[0] == m[0])
     {
-        printf("draw");
+        printf("draw \n");
         score[0][id][0] += 10;
         score[0][id2][0] += 10;
+        goto q;
     }
     if ((n[0] == 'P' && m[0] == 'R') || (n[0] == 'R' && m[0] == 'S') ||
         (n[0] == 'S' && m[0] == 'P'))
@@ -373,6 +365,7 @@ void rockpaperscissors()
         printf("player 2 win");
         score[0][id2][0] += 20;
     }
+    q:
     for (int i = 0; i < 50; i++)
     {
         printf("=");
@@ -382,7 +375,7 @@ void rockpaperscissors()
     {
         printf("=");
     }
-    printf(" \nGame : Tic-Tac-Toe\n");
+    printf(" \nGame : Rock-Paper-scissors\n");
     for (int i = 1; i <= id2; i++)
     {
         printf(" %s     %d\n", name1[i], score[0][i][0]);
@@ -423,4 +416,16 @@ void showhighscore()
     }
     printf(" high score of tic tac toe is %d by %s\n", hightic, name1[id2]);
     printf( "hello");
+}
+void addplayer()
+{
+    printf("\nenter player:");
+   game_id++;
+    scanf("%s", name1[game_id]);
+    printf("your game id is %d", game_id);
+    game_id++;
+    printf("\nenter player:");
+    scanf("%s", name1[game_id]);
+
+    printf("\nyour game id is %d", game_id);
 }
