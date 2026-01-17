@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background-color: black;
+        }
+        :root {
+  --netflix-red: #e50914;
+  --bg-dark: #000000;
+}
+
+.netflix-curve-container {
+  position: absolute;
+  height: 70px; 
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--bg-dark);
+  border-top-left-radius: 50% 50%;
+  border-top-right-radius: 50% 50%;
+  border-top: solid 4px transparent;
+}
+
+.netflix-curve-overlay {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 50%;
+   
+  /* Creates the curve */
+  border-top-left-radius: 50% 100%;
+  border-top-right-radius: 50% 100%;
+  border-top: solid 4px transparent;
+  
+ 
+  background: 
+    linear-gradient(to right, 
+      rgba(33, 13, 22, 1) 0%, 
+      rgba(184, 40, 105, 1) 30%, 
+      var(--netflix-red) 50%, 
+      rgba(184, 40, 105, 1) 70%, 
+      rgba(33, 13, 22, 1) 100%
+    ) border-box;
+    
+ 
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+}
+
+
+.netflix-curve-container::before {
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(50% 100% at 50% 0%, rgba(64, 97, 231, 0.4) 0%, transparent 100%);
+  z-index: 0;
+}
+        
+.logo{ 
+     height: 150px;
+    width: 150px;
+   
+ 
+}
+    .logo img{
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+.na{
+    display: flex;
+    justify-content: center;
+
+}
+    .nav{
+        display: flex;
+       justify-content:space-between;
+       align-items: center;
+     height: 70px;
+        width: 80%;
+      
+       
+       
+    }
+    .search-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 50px;
+        gap: 20px;
+        text-align: center;
+        height: calc(100vh - 140px);
+        width: 100%;
+    }
+    .search-box{
+        display: flex;
+        align-items: center;
+       
+        border-radius: 6px;
+        overflow: hidden;
+    }
+    .search-input{
+        padding: 10px 14px;
+        font-size: 16px;
+        border: 0;
+        border: 1px solid rgb(76, 117, 14);
+ background-color: rgba(0, 0, 0, 0.5);
+ margin-right: 10px;
+        outline: none;
+        width: 320px;
+    }
+    .search-button{
+        padding: 10px 16px;
+        font-size: 16px;
+        border: 0;
+        background: #e50914;
+        color: #fff;
+        cursor: pointer;
+    }
+    .eng{
+
+        display: flex;
+        gap: 10px;
+
+    }
+    .btn{
+        height: 30px;
+        width: 80px;
+        border-radius: 5px;
+        border: none;
+        background-color:rgba(0, 2, 51, 0.018);
+        border: 3px solid white;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    .rom{ height: 500px;
+        margin: auto;
+        color: white;
+        font-size: 40px;
+        width: 70%;
+        border: 2px solid black;
+        }
+     .back
+    {
+        background-image: url('https://assets.nflxext.com/ffe/siteui/vlv3/e393bb3f-261f-43d1-99bb-16a157885615/web/IN-en-20260105-TRIFECTA-perspective_2802b120-4b8c-44a5-8fb9-617a728f4ec6_large.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 100vh; 
+    }
+    .search-container .watch{
+        font-size: 24px;
+        font-weight: normal;
+    }
+    .but{
+        height: 30px;
+        width: 80px;
+        border-radius: 5px;
+        border: none;
+        background-color: red;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    .next-btn{
+        position: absolute;
+        right: 24px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255,255,255,0.08);
+        color: #fff;
+        border: 1px solid rgba(255,255,255,0.18);
+        padding: 10px 14px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+        backdrop-filter: blur(4px);
+    }
+.trending-container {
+  overflow: hidden;
+  padding: 40px 0;
+  background-color: #000; 
+    position: relative;
+}
+
+.trending-list {
+  display: flex;
+  overflow-x: auto;
+  gap: 30px;
+  padding: 0 50px;
+  scroll-behavior: smooth;
+  scrollbar-width: none; 
+ 
+}
+.trending-list::-webkit-scrollbar {
+  display: none;
+}
+
+.movie-card {
+  position: relative;
+  min-width: 180px;
+  height: 250px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-end;
+}
+
+.movie-card::before {
+  content: attr(data-rank); 
+  position: absolute;
+  left: -20px;
+  bottom: -10px;
+  font-size: 150px;
+  font-weight: 900;
+  color: #000;
+  -webkit-text-stroke: 2px #555; 
+  z-index: 1;
+}
+
+
+.movie-card:hover {
+  z-index: 10; 
+}
+
+.movie-card:hover img {
+  transform: scale(1.1); 
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); 
+}
+
+.trending-list:hover .movie-card:not(:hover) {
+  opacity: 0.7;
+  filter: grayscale(0.5);
+  transition: 0.3s;
+}
+.movie-card img {
+  width: 100%;
+  height: 90%; 
+  object-fit: cover;
+  border-radius: 4px;
+ position: relative;
+ pointer-events: cursor;
+ transition: transform 0.3s ease, z-index 0s;
+  cursor: pointer;
+}
+       
+       .black{
+        background-color: rgba(0, 0, 0, 0.5);
+        height: 100vh;
+        width: 100vw;
+       }
+.join{
+    height: 250px;  
+ display: flex;
+ color: white;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+.morej{
+    height: 250px;
+    width: 250px;
+    border: 2px solid black;
+    border-radius: 15px;
+    font-size: 20px;
+    color: white;
+    background: linear-gradient(to right, 
+      rgb(110, 64, 85) 0%, 
+      rgb(1, 4, 54) 225%, 
+      red 150%,
+      white 255%,
+      rgb(218, 107, 157) 100%
+    ) border-box;
+}
+.enjoy
+{ margin-left: 8px;
+    margin-top: 8px;
+    font-size: 30px;
+}
+.waaa{
+    font-size: 18px;
+    margin-left: 8px;
+    margin-top: 10px;
+}
+body {
+  background-color: #000; /* Netflix background */
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+.faq-container {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 0 20px;
+}
+
+h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 25px;
+}
+
+/* The Box */
+.faq-item {
+  background-color: #2d2d2d; /* Dark grey */
+  margin-bottom: 8px;
+}
+
+/* The Header */
+summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  list-style:circle; /* Removes default arrow in most browsers */
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+.content {
+  padding: 0 24px 24px 24px;
+  font-size: 1.2rem;
+  border-top: 1px solid #000; 
+}
+.faq-item:hover {
+  background-color: #414141;
+}
+details[open] .icon {
+  transform: rotate(45deg);
+}
+
+.icon {
+  font-size: 2rem;
+  transition: transform 0.2s ease; 
+  display: inline-block;
+}
+
+    </style>
+    </head>
+    <body> <div class="back">
+            <div class="black">
+                <div class="na"> <nav class="nav"> <span class="logo"><img
+                                src="logo.svg" alt="netflix"> </span> <span
+                            class="eng"><button
+                                class="btn">english</button><button
+                                class="but">Sign In</button></span></nav></div>
+                <div class="search-container"> Unlimited Movies, shows, and more
+                    <div class="watch">Watch anywhere. Cancel anytime.</div>
+                    <span class="search-box"><input type="email"
+                            placeholder="Email address"
+                            class="search-input"><button
+                            class="search-button">Search</button></span>
+                </div>
+                <div class="netflix-curve-container">
+                    <div class="netflix-curve-overlay"></div>
+                </div>
+
+            </div>
+        </div>
+        <div class="rom">
+            Tranding Now
+            <div class="trending-container">
+
+                <div class="trending-list">
+
+                    <div class="movie-card" data-rank="1">
+
+                        <img
+                            src="https://occ-0-2483-3647.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABXMlNt8lRlEH5nkoYUHkzaYFsKJJvQq-3wQ4-DyYWQmKlxu9qrynyD5cNZEHPowiQL9IPEPbTSBM9B-id8nR8QPVfL1P_CQjPOqe5ZsDbekwH5AVJbhS3v4gSBXhZb4qdcE6.webp?r=e8a"
+                            alt="Movie Title">
+                    </div>
+                    <div class="movie-card" data-rank="2">
+                        <img
+                            src="https://occ-0-2483-3647.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABVeIHiYaDJJIysNwDA2dgsHF3DpeFf1lXUwfmyaYJGvJxptKGrreOWRiosLCEviE_yZybYWhxEPSmyxoSVNhCycRblBIR_sH38c.webp?r=902"
+                            alt="Movie Title">
+                    </div>
+                    <div class="movie-card" data-rank="3">
+                        <img
+                            src="https://occ-0-2483-3647.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABRyZw5hVzYNlj5cnTUlbq5EqtdSdsAsspntVAHNzTW-VaxaTK4A5d_0pDxPjmoxcs7O51dpWAhCpvB-1r6tBUotO4OHGYteFQzA.webp?r=32c"
+                            alt="Movie Title">
+                    </div>
+                    <div class="movie-card" data-rank="4">
+                        <img
+                            src="https://occ-0-2483-3647.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABTk_B0l_BvDJ7CQuWOAax9ZKSAe65vFGUMjAee8pcvuYXDFDvcnFaF8nOEuwxBg-TFKzHTqhdD3D7zlMsXSpA_BQTHf-ouBVNdwJIJvNQzUGje4WVrnptKL5Ywqu9hV7pg3A.webp?r=f34"
+                            alt="Movie Title">
+                    </div>
+                    <div class="movie-card" data-rank="5">
+                        <img
+                            src="https://occ-0-2483-3647.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABd-hr2-TdXUEamf_D6vpIxJwKZnueEgjHxa05fdGIYTOXwYvXtkrUhfvtySeRKLFhR7MDZG5cNAtmb52qROa-ZKOftFckYIuFKo.webp?r=4a4"
+                            alt="Movie Title">
+                    </div>
+                    <div class="movie-card" data-rank="6">
+                        <img
+                            src="https://occ-0-2483-3647.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABaz9GSNMsMVZSPLChs7KGs4d0-W6yDUA3sw3EYGXW3wnr-174hHmC6wzKD7_UWlm358xyJrz_1m-lrWKZnhSuX6-0rM9zhyWfKOXCewQXWEWqf1Vbox--iFLpnX9wVtykdEO.webp?r=505"
+                            alt="Movie Title">
+                    </div>
+                    <div class="movie-card" data-rank="7">
+                        <img
+                            src="https://occ-0-2483-3647.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABTJf3e14TtZ2Z3216UaphDq5nf1SaFyC-0R59wDCSyGdNROqYPTHg8g8SU0kbcn61BMumEkghBN8r11S6_bhQvNJ4oQD4oECM-M.webp?r=e5d"
+                            alt="Movie Title">
+                    </div>
+                    <div class="movie-card" data-rank="8">
+                        <img
+                            src="https://occ-0-2483-3647.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABbYO2gjJ1FS1sOclm-qxujj4AMMEnOQXvLRyAxUhpecdfWiICDz2zBlM31jFAdOU2lfZ57ZhXdTP5VfvwyoBE_SDTG4AuVN7XaE.webp?r=1f1"
+                            alt="Movie Title">
+                    </div>
+                    <div class="movie-card" data-rank="9">
+                        <img
+                            src="https://occ-0-2483-3647.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABTELBclTkAkJgPaHohb86tSczXpMkZ5Xm0gaL2SgOH9fV5qJEBJsRVyWJgxYba7AnGM4u-MWP3HXAh8lA_H5IZS24mvCNyq65YI.webp?r=24f"
+                            alt="Movie Title">
+                    </div>
+                    <div class="movie-card" data-rank="10">
+                        <img
+                            src="https://occ-0-2483-3647.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABemK-aHwX63DztqbWwQ0xnYGvHYuoYkQ3l3ZIwftPjmuJxC461m-FOI7ZN_bzolsgGd_3_dbacKgr5mV292UjjEYJGCgIubIQOs.webp?r=273"
+                            alt="Movie Title">
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <div style="color: white; font-size: 30px; margin-left: 230px;"> More
+            Reasons To join</div>
+        <div class="join">
+
+            <div class="morej"> <div class="enjoy"> Enjoy On Your TV</div><div
+                    class="waaa">Watch on smart TVs, PlayStation, Xbox,
+                    Chromecast, Apple TV, Blu-ray players and more.
+
+                </div>
+            </div>
+            <div class="morej"><div class="enjoy"> Enjoy On Your TV</div><div
+                    class="waaa">Watch on smart TVs, PlayStation, Xbox,
+                    Chromecast, Apple TV, Blu-ray players and more.
+
+                </div></div>
+            <div class="morej"><div class="enjoy"> Enjoy On Your TV</div><div
+                    class="waaa">Watch on smart TVs, PlayStation, Xbox,
+                    Chromecast, Apple TV, Blu-ray players and more.
+
+                </div></div>
+            <div class="morej"><div class="enjoy"> Enjoy On Your TV</div><div
+                    class="waaa">Watch on smart TVs, PlayStation, Xbox,
+                    Chromecast, Apple TV, Blu-ray players and more.
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="faq-container">
+  <h2>Frequently Asked Questions</h2>
+  
+  <details class="faq-item">
+    <summary>What is Netflix? <span class="icon">+</span></summary>
+    <div class="content">
+      <p>Netflix is a streaming service that offers a wide variety of award-winning TV shows, movies, anime, documentaries, and more.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How much does Netflix cost? <span class="icon">+</span></summary>
+    <div class="content">
+      <p>Watch Netflix on your smartphone, tablet, Smart TV, laptop, or streaming device, all for one fixed monthly fee.</p>
+    </div>
+  </details>
+</div>
+    </body>
+</html>
